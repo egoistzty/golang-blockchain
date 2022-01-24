@@ -6,13 +6,13 @@ import (
 )
 
 type BlockChain struct {
-	blocks []*Block
+	Blocks []*Block
 }
 
 type Block struct {
-	Hash     []byte //The hash value of this block
-	Data     []byte //The data in this block
-	PrevHash []byte //The hash value of the previous/last block
+	Hash     []byte //The hash value of this Block
+	Data     []byte //The data in this Block
+	PrevHash []byte //The hash value of the previous/last Block
 }
 
 func (b *Block) DeriveHash() {
@@ -22,15 +22,15 @@ func (b *Block) DeriveHash() {
 }
 
 func CreateBlock(data string, prevHash []byte) *Block {
-	block := &Block{[]byte{}, []byte(data), prevHash}
-	block.DeriveHash()
-	return block
+	Block := &Block{[]byte{}, []byte(data), prevHash}
+	Block.DeriveHash()
+	return Block
 }
 
 func (chain *BlockChain) AddBlock(data string) {
-	prevBlock := chain.blocks[len(chain.blocks)-1]
+	prevBlock := chain.Blocks[len(chain.Blocks)-1]
 	new := CreateBlock(data, prevBlock.Hash)
-	chain.blocks = append(chain.blocks, new)
+	chain.Blocks = append(chain.Blocks, new)
 }
 
 func Genesis() *Block {
